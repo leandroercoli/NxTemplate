@@ -85,9 +85,9 @@ Make sure that the `index.d.ts` file contains: `declare module '@prisma/nextjs-m
 
 ## Vercel Deployment
 
-Override `Build command`: `nx run prisma-schema-app-1:generate && npx nx build monorepo-social --prod`
+Override `Build command`: `nx run prisma-schema-app-1:generate && npx nx build app-1 --prod`
 
-Override `Output Directory`: `apps/monorepo-social/.next`
+Override `Output Directory`: `apps/app-1/.next`
 
 ## Clerk Webhooks
 
