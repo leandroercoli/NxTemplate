@@ -1,22 +1,11 @@
-//@ts-check
+const { PrismaPlugin } = require('@prisma/nextjs-monorepo-workaround-plugin');
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const { composePlugins, withNx } = require('@nx/next');
+module.exports = {
+    webpack: (config, { isServer }) => {
+        if (isServer) {
+            config.plugins = [...config.plugins, new PrismaPlugin()];
+        }
 
-/**
- * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
- **/
-const nextConfig = {
-    nx: {
-        // Set this to true if you would like to use SVGR
-        // See: https://github.com/gregberge/svgr
-        svgr: false,
+        return config;
     },
 };
-
-const plugins = [
-    // Add more Next.js plugins to this list if needed.
-    withNx,
-];
-
-module.exports = composePlugins(...plugins)(nextConfig);
