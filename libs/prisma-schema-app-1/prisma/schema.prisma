@@ -1,0 +1,38 @@
+// Shared Prisma schema for the Apps in the App Monorepo
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../../../node_modules/@prisma/client-app-1"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+// -------------------------------------- Shared models
+
+model User {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  clerkUserId String?  @unique
+  displayName String?
+  slug        String   @unique
+  imageUrl    String?
+  isBot       Boolean  @default(false)
+  isPrivate   Boolean  @default(false)
+  isVerified  Boolean  @default(false)
+  Posts       Post[]   @relation("PostAuthor")
+}
+
+model Post {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Author    User     @relation("PostAuthor", fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+  title     String
+  content   String
+  published Boolean  @default(false)
+}

@@ -1,0 +1,27 @@
+{
+    "name": "prisma-schema-app-1",
+    "$schema": "../../node_modules/nx/schemas/project-schema.json",
+    "sourceRoot": "prisma-schema-app-1/src",
+    "projectType": "library",
+    "tags": [],
+    "targets": {
+        "prisma": {
+            "command": "prisma",
+            "options": {
+                "cwd": "libs/prisma-schema-app-1"
+            }
+        },
+        "migrate": {
+            "command": "prisma migrate dev",
+            "options": {
+                "cwd": "libs/prisma-schema-app-1"
+            }
+        },
+        "generate": {
+            "command": "prisma generate",
+            "options": {
+                "cwd": "libs/prisma-schema-app-1"
+            }
+        }
+    }
+}
